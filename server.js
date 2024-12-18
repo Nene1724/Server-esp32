@@ -50,3 +50,17 @@ wss.on("connection", (ws, req) => {
             androidClient = null;
         } else {
             console.log("A client disconnected!");
+        }
+    });
+});
+
+// Endpoint root đơn giản
+app.get("/", (req, res) => {
+    res.send("WebSocket Server for ESP32-CAM and Android!");
+});
+
+// Chạy server
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
