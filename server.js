@@ -18,11 +18,11 @@ wss.on("connection", (ws) => {
         if (msg === "ESP32_CONNECTED") {
             esp32Client = ws;
             console.log("ESP32-CAM connected!");
-        } else if (msg.startsWith("COMMAND:")) {
-            console.log("Received command from Android: ", msg);
-            if (esp32Client) esp32Client.send(msg);
         } else if (esp32Client === ws) {
-            if (androidClient) androidClient.send(message);
+            console.log("Received image data from ESP32"); 
+            // Gửi phản hồi "ACK" về ESP32
+            ws.send("ACK");
+            if (androidClient) androidClient.send(message); // Forward ảnh đến Android
         }
     });
 
